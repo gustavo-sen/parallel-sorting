@@ -1,3 +1,5 @@
+import algorithms.quicksort.QuickSortParallel;
+
 import java.util.Scanner;
 
 public class Main {
@@ -6,16 +8,20 @@ public class Main {
 
     public static void main(String[] args) {
         int testCase = 0;
-
-        System.out.println("Quick Sort 0");
+        System.out.println("Algoritimos");
+        System.out.println("Quick Sort - 0");
         Scanner sc = new Scanner(System.in);
         testCase = sc.nextInt();
 
+        QuickSortParallel qs = new QuickSortParallel();
+
+        int arr[] = {2, 1, 3, 4, 5, 6, 9};
+
         switch (testCase){
             case 0:
-
-            default:
-                System.out.println("invalido");
+                startTimer();
+                qs.sort(arr);
+                stopTimer();
         }
     }
 
@@ -26,6 +32,6 @@ public class Main {
 
     public static void stopTimer(){
         endTime = System.nanoTime();
-        System.out.println(String.format("Teste Finalizado %d", (startTime - endTime)));
+        System.out.println(String.format("Teste Finalizado em ~%d ms", (endTime - startTime)/ 1_000_000));
     }
 }
