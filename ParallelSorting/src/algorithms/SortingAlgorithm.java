@@ -1,4 +1,4 @@
-package edu.sortingalgorithm;
+package algorithms;
 
 public interface SortingAlgorithm {
     void sort(int[] array);
