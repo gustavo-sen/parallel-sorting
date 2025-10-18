@@ -22,7 +22,7 @@ public class Main {
         switch (testCase){
             case 0:
                 startTimer();
-                QuickSortParallel.s(data);
+                QuickSortParallel.sort(data);
                 stopTimer();
         }
     }
