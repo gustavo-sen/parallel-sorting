@@ -1,3 +1,4 @@
+import algorithms.quicksort.QuickSort;
 import algorithms.quicksort.QuickSortParallel;
 
 import java.util.Random;
@@ -21,6 +22,8 @@ public class Main {
             case 0:
                 startTimer();
                 QuickSortParallel.sort(data);
+                stopTimer();
+                startTimer();
                 stopTimer();
         }
     }
