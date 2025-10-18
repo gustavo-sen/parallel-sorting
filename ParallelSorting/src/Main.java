@@ -11,11 +11,9 @@ public class Main {
     static int[] data = new int[SIZE];
 
     public static void main(String[] args) {
-        int testCase = 0;
-        System.out.println("Algoritimos");
         System.out.println("Quick Sort - 0");
         Scanner sc = new Scanner(System.in);
-        testCase = sc.nextInt();
+        int testCase = sc.nextInt();
 
         genRandomData();
 
@@ -34,7 +32,7 @@ public class Main {
 
     public static void stopTimer(){
         endTime = System.nanoTime();
-        System.out.println(String.format("Teste Finalizado em ~%d ms", (endTime - startTime)/ 1_000_000));
+        System.out.printf("Teste Finalizado em ~%d ms \n", (endTime - startTime)/ 1_000_000);
     }
 
     public static void genRandomData(){
