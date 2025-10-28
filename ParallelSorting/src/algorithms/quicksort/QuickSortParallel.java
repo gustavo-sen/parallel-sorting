@@ -6,13 +6,13 @@ import java.util.concurrent.RecursiveAction;
 public class QuickSortParallel extends RecursiveAction {
 
     private int[] array;
-    private int low;
-    private int high;
+    private int lo;
+    private int hi;
 
-    QuickSortParallel(int[] array, int low, int high){
+    QuickSortParallel(int[] array, int lo, int hi){
         this.array = array;
-        this.low = low;
-        this.high = high;
+        this.lo = lo;
+        this.hi = hi;
     }
 
     public static void sort(int[] array) {
@@ -27,29 +27,28 @@ public class QuickSortParallel extends RecursiveAction {
 
     @Override
     protected void compute() {
-        if (low < high) {
+        if (lo < hi) {
+            int pvIndex = partition(array, lo, hi);
+            
+            QuickSortParallel leftTask = new QuickSortParallel(array, lo, pvIndex - 1);
+            QuickSortParallel rightTask = new QuickSortParallel(array, pvIndex + 1, hi);
 
-            int pivotIndex = partition(array, low, high);
-
-            QuickSortParallel leftTask = new QuickSortParallel(array, low, pivotIndex - 1);
-            QuickSortParallel rightTask = new QuickSortParallel(array, pivotIndex + 1, high);
-
+            // junta return das tasks
             invokeAll(leftTask, rightTask);
         }
     }
 
-    private int partition(int[] arr, int low, int high) {
-        int pivot = arr[high];
-        int i = low - 1;
+    private int partition(int[] arr, int lo, int hi) {
+        int pv = arr[hi];
+        int i = lo - 1;
 
-        for (int j = low; j < high; j++) {
-            if (arr[j] <= pivot) {
+        for (int j = lo; j < hi; j++) {
+            if (arr[j] <= pv) {
                 i++;
                 swap(arr, i, j);
             }
         }
-
-        swap(arr, i + 1, high);
+        swap(arr, i + 1, hi);
 
         return i + 1;
     }
