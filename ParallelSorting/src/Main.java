@@ -1,8 +1,12 @@
+import algorithms.mergeSort.MergeSort;
 import algorithms.quicksort.QuickSort;
 import algorithms.quicksort.QuickSortParallel;
 
 import java.util.Random;
-import java.util.Scanner;
+
+import static algorithms.mergeSort.MergeSort.mergeSort;
+import static algorithms.mergeSort.ParallelMergeSort.mergeSortParallel;
+import static algorithms.quicksort.QuickSort.quickSort;
 
 public class Main {
     static long startTime = 0;
@@ -12,20 +16,28 @@ public class Main {
     static int[] data = new int[SIZE];
 
     public static void main(String[] args) {
-        System.out.println("Quick Sort - 0");
-        Scanner sc = new Scanner(System.in);
-        int testCase = sc.nextInt();
+        System.out.println("==== Quick Sort ====");
 
         genRandomData();
 
-        switch (testCase){
-            case 0:
-                startTimer();
-                QuickSortParallel.sort(data);
-                stopTimer();
-                startTimer();
-                stopTimer();
-        }
+        System.out.println("-- QuickSort paralelo --");
+        startTimer();
+        QuickSortParallel.sort(data);
+        stopTimer();
+        System.out.println("-- QuickSort Sequencial --");
+        startTimer();
+        quickSort(data);
+        stopTimer();
+
+        System.out.println("==== Merge Sort ====");
+        startTimer();
+        System.out.println("-- MergeSort paralelo --");
+        mergeSortParallel(data);
+        stopTimer();
+        startTimer();
+        System.out.println("-- MergeSort Sequencial --");
+        mergeSort(data);
+        stopTimer();
     }
 
     public static void startTimer(){
@@ -39,7 +51,7 @@ public class Main {
     }
 
     public static void genRandomData(){
-        System.out.println("Gerando " + SIZE + " números aleatórios...");
+        System.out.printf("Gerando %d números aleatórios...", SIZE);
         Random random = new Random();
         for (int i = 0; i < SIZE; i++) {
             data[i] = random.nextInt(SIZE);
