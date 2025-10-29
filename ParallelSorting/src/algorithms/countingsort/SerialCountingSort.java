@@ -1,11 +1,7 @@
 package algorithms.countingsort;
 
-import algorithms.SortingAlgorithm;
+public class SerialCountingSort {
 
-
-public class SerialCountingSort implements SortingAlgorithm {
-
-    @Override
     public void sort(int[] array) {
         int n = array.length;
         if (n <= 1) return;
@@ -42,10 +38,4 @@ public class SerialCountingSort implements SortingAlgorithm {
             }
         }
     }
-
-    @Override
-    public void sort(String[] args) { }
-
-    @Override
-    public void export() { }
 }

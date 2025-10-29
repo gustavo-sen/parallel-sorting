@@ -1,10 +1,7 @@
 package algorithms.countingsort;
 
-import algorithms.SortingAlgorithm;
+public class ParallelCountingSort {
 
-public class ParallelCountingSort implements SortingAlgorithm {
-
-    @Override
     public void sort(int[] array) {
         int length = array.length;
         if (length <= 1) return;
@@ -75,10 +72,4 @@ public class ParallelCountingSort implements SortingAlgorithm {
 
         System.arraycopy(output, 0, array, 0, length);
     }
-
-    @Override
-    public void sort(String[] args) { }
-
-    @Override
-    public void export() { }
 }

@@ -1,11 +1,10 @@
 package algorithms.selectionsort;
 
-import algorithms.SortingAlgorithm;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class ParallelSelectionSort implements SortingAlgorithm {
+public class ParallelSelectionSort {
     private static void swap(int[] arr, int start, int end) {
         int temp = arr[start];
         arr[start] = arr[end];
@@ -18,7 +17,6 @@ public class ParallelSelectionSort implements SortingAlgorithm {
         }
     }
 
-    @Override
     public void sort(int[] array) {
         int arrayLength = array.length;
         int lastIndex = arrayLength - 1;
@@ -82,15 +80,5 @@ public class ParallelSelectionSort implements SortingAlgorithm {
 
         // Shutdown the executor when done
         executor.shutdown();
-    }
-
-    @Override
-    public void sort(String[] args) {
-
-    }
-
-    @Override
-    public void export() {
-
     }
 }

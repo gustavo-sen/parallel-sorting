@@ -1,9 +1,6 @@
 package algorithms.selectionsort;
 
-import algorithms.SortingAlgorithm;
-
-public class SerialSelectionSort implements SortingAlgorithm {
-    @Override
+public class SerialSelectionSort {
     public void sort(int[] array) {
         for (int i = 0; i < array.length; i++) {
             int minIndex = i;
@@ -17,10 +14,4 @@ public class SerialSelectionSort implements SortingAlgorithm {
             array[minIndex] = temp;
         }
     }
-
-    @Override
-    public void sort(String[] args) {}
-
-    @Override
-    public void export() {}
 }
