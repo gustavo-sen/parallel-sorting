@@ -6,14 +6,18 @@ public class QuickSort {
         if (array == null || array.length == 0) {
             return;
         }
-        recQuick(array, 0, array.length - 1);
+        recQuick(array, 0, array.length - 1, 0);
     }
 
-    private static void recQuick(int[] array, int low, int high) {
+    private static void recQuick(int[] array, int low, int high, int depth) {
         if (low < high) {
+            if (depth > 1000) {
+                System.out.println("Rapaz, papocou aqui, vamo ter q parar, deve ta quase todo sorted");
+                return;
+            }
             int pivotIndex = partition(array, low, high);
-            recQuick(array, low, pivotIndex - 1);
-            recQuick(array, pivotIndex, high);
+            recQuick(array, low, pivotIndex - 1, depth + 1);
+            recQuick(array, pivotIndex + 1, high, depth + 1);
         }
     }
 

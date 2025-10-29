@@ -12,31 +12,37 @@ public class Main {
     static long startTime = 0;
     static long endTime = 0;
 
-    static final int SIZE = 100_000_000;
+    static final int SIZE = 100_000;
     static int[] data = new int[SIZE];
 
     public static void main(String[] args) {
+        genRandomData();
+        int[] dataQuickParallel = data.clone();
+        int[] dataQuickSeries = data.clone();
+        int[] dataMergeParallel = data.clone();
+        int[] dataMerge = data.clone();
+
         System.out.println("==== Quick Sort ====");
 
-        genRandomData();
-
+        System.out.println();
         System.out.println("-- QuickSort paralelo --");
         startTimer();
-        QuickSortParallel.sort(data);
+        QuickSortParallel.sort(dataQuickParallel);
+        System.out.println();
         stopTimer();
         System.out.println("-- QuickSort Sequencial --");
         startTimer();
-        quickSort(data);
+        quickSort(dataQuickSeries);
         stopTimer();
 
         System.out.println("==== Merge Sort ====");
         startTimer();
         System.out.println("-- MergeSort paralelo --");
-        mergeSortParallel(data);
+        mergeSortParallel(dataMergeParallel);
         stopTimer();
         startTimer();
         System.out.println("-- MergeSort Sequencial --");
-        mergeSort(data);
+        mergeSort(dataMerge);
         stopTimer();
     }
 
