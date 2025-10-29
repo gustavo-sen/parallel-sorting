@@ -12,6 +12,21 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs = ['ParallelSorting/src']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['ParallelSorting/test']
+        }
+    }
+}
+
+
+
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -19,4 +34,10 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+        showStandardStreams = false
+    }
+
 }
