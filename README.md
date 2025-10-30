@@ -1,5 +1,9 @@
 # Algoritmos de Sorting
 
+Equipe: 
+ - Gustavo Abdon
+ - Filipe Soares
+
 ## QuickSort
 
 > **Tipo:** Divide e Conquista
