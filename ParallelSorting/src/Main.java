@@ -21,7 +21,7 @@ public class Main {
     static long startTime = 0;
     static long endTime = 0;
 
-    static final int SIZE = 500_000;
+    static final int SIZE = 1_000_000;
     static final String CSV_FILE = SIZE + "-sample.csv";
     static int[] data = new int[SIZE];
 

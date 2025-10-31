@@ -82,3 +82,23 @@ Equipe:
 - A reconstrução final é feita de modo **sequencial**.
 
 **Benefício:** Acelera significativamente a fase de contagem.  
+
+
+## Resultados
+
+Os gráficos a seguir foram gerados a partir dos CSVs em `graphics/data` e comparam o tempo (ms) em função do tamanho da amostra para as versões sequencial (azul) e paralela (vermelho) de cada algoritmo (QuickSort, MergeSort, SelectionSort e CountingSort).
+
+Observação: SelectionSort paralelo e CountingSort paralelo usam 2 threads; QuickSort e MergeSort paralelos usam o pool comum do sistema.
+
+![Tempo vs Tamanho da Amostra — Paralelo (vermelho) vs Sequencial (azul)](graphics/graphics/speed_vs_sample_size_grid.png)
+
+Os resultados indicam que as implementações desenvolvidas, apenas a do InsertionSort teve o melhor desempenho quando executado em paralelo.
+O principal motivo é que além da maior parte da execução ser paralelo, as threads não ficavam ociosas durante a sua execução e nem tinham problemas de overhead.
+No caso do counting sort, o manejo de cópias de grandes arrays em duas threads além de apenas a primeira parte do processo ser paralelizável não gerou melhorias na execução paralela.
+Já para o quicksort e merge sort, a abordagem de substituir a recursão por threads da common pool não demonstrou eficiente, provavelmente pela soma do overhead com o tempo ocioso de cada threads esperando as threads filhas terminarem.
+Talvez uma abordagem que reutilização de threads (como no InsertionSort) possa melhorar o desempenho.
+
+Arquivos disponíveis:
+- [PNG](graphics/graphics/speed_vs_sample_size_grid.png)
+- [JPG](graphics/graphics/speed_vs_sample_size_grid.jpg)
+- [PDF](graphics/graphics/speed_vs_sample_size_grid.pdf)

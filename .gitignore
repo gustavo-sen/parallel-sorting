@@ -71,6 +71,16 @@ Desktop.ini
 *.swo
 *~
 
+# python
+*.venv/
+venv/
+env/
+
+__pycache__/
+*.pyc
+*.pyd
+*.pyo
+
 # Test output
 test-output/
 test-results/

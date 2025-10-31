@@ -1,0 +1,19 @@
+[project]
+name = "graphics"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "filipe-ts",email = "filipets@live.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "notebook (>=7.4.7,<8.0.0)",
+    "polars (>=1.35.1,<2.0.0)",
+    "matplotlib (>=3.10.7,<4.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
