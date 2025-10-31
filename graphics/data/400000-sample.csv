@@ -1,0 +1,9 @@
+implentation_name,time,sample_size
+QuickSort paralelo,119,400000
+QuickSort sequencial,160,400000
+MergeSort paralelo,262,400000
+MergeSort sequencial,62,400000
+SelectionSort paralelo,25406,400000
+SelectionSort sequencial,51346,400000
+CountingSort paralelo,21,400000
+CountingSort sequencial,9,400000

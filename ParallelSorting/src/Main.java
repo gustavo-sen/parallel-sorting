@@ -1,7 +1,16 @@
 import algorithms.mergeSort.MergeSort;
 import algorithms.quicksort.QuickSort;
 import algorithms.quicksort.QuickSortParallel;
+import algorithms.selectionsort.SerialSelectionSort;
+import algorithms.selectionsort.ParallelSelectionSort;
+import algorithms.countingsort.SerialCountingSort;
+import algorithms.countingsort.ParallelCountingSort;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.Random;
 
 import static algorithms.mergeSort.MergeSort.mergeSort;
@@ -12,7 +21,8 @@ public class Main {
     static long startTime = 0;
     static long endTime = 0;
 
-    static final int SIZE = 100_000;
+    static final int SIZE = 1_000_000;
+    static final String CSV_FILE = SIZE + "-sample.csv";
     static int[] data = new int[SIZE];
 
     public static void main(String[] args) {
@@ -21,6 +31,10 @@ public class Main {
         int[] dataQuickSeries = data.clone();
         int[] dataMergeParallel = data.clone();
         int[] dataMerge = data.clone();
+        int[] dataSelectionParallel = data.clone();
+        int[] dataSelectionSerial = data.clone();
+        int[] dataCountingParallel = data.clone();
+        int[] dataCountingSerial = data.clone();
 
         System.out.println("==== Quick Sort ====");
 
@@ -29,21 +43,57 @@ public class Main {
         startTimer();
         QuickSortParallel.sort(dataQuickParallel);
         System.out.println();
-        stopTimer();
+        long tQuickPar = stopTimer();
+        writeCsvRow("QuickSort paralelo", tQuickPar, SIZE);
+
         System.out.println("-- QuickSort Sequencial --");
         startTimer();
         quickSort(dataQuickSeries);
-        stopTimer();
+        long tQuickSeq = stopTimer();
+        writeCsvRow("QuickSort sequencial", tQuickSeq, SIZE);
 
         System.out.println("==== Merge Sort ====");
         startTimer();
         System.out.println("-- MergeSort paralelo --");
         mergeSortParallel(dataMergeParallel);
-        stopTimer();
+        long tMergePar = stopTimer();
+        writeCsvRow("MergeSort paralelo", tMergePar, SIZE);
+
         startTimer();
         System.out.println("-- MergeSort Sequencial --");
         mergeSort(dataMerge);
-        stopTimer();
+        long tMergeSeq = stopTimer();
+        writeCsvRow("MergeSort sequencial", tMergeSeq, SIZE);
+
+        System.out.println("==== Selection Sort ====");
+        ParallelSelectionSort pSel = new ParallelSelectionSort();
+        SerialSelectionSort sSel = new SerialSelectionSort();
+        System.out.println("-- SelectionSort paralelo --");
+        startTimer();
+        pSel.sort(dataSelectionParallel);
+        long tSelPar = stopTimer();
+        writeCsvRow("SelectionSort paralelo", tSelPar, SIZE);
+
+        System.out.println("-- SelectionSort Sequencial --");
+        startTimer();
+        sSel.sort(dataSelectionSerial);
+        long tSelSeq = stopTimer();
+        writeCsvRow("SelectionSort sequencial", tSelSeq, SIZE);
+
+        System.out.println("==== Counting Sort ====");
+        ParallelCountingSort pCount = new ParallelCountingSort();
+        SerialCountingSort sCount = new SerialCountingSort();
+        System.out.println("-- CountingSort paralelo --");
+        startTimer();
+        pCount.sort(dataCountingParallel);
+        long tCountPar = stopTimer();
+        writeCsvRow("CountingSort paralelo", tCountPar, SIZE);
+
+        System.out.println("-- CountingSort Sequencial --");
+        startTimer();
+        sCount.sort(dataCountingSerial);
+        long tCountSeq = stopTimer();
+        writeCsvRow("CountingSort sequencial", tCountSeq, SIZE);
     }
 
     public static void startTimer(){
@@ -51,9 +101,25 @@ public class Main {
         startTime = System.nanoTime();
     }
 
-    public static void stopTimer(){
+    public static long stopTimer(){
         endTime = System.nanoTime();
-        System.out.printf("Teste Finalizado em ~%d ms \n", (endTime - startTime)/ 1_000_000);
+        long elapsedMs = (endTime - startTime) / 1_000_000;
+        System.out.printf("Teste Finalizado em ~%d ms \n", elapsedMs);
+        return elapsedMs;
+    }
+
+    private static void writeCsvRow(String implementationName, long timeMs, int sampleSize) {
+        Path path = Path.of(CSV_FILE);
+        try {
+            if (!Files.exists(path)) {
+                String header = "implentation_name,time,sample_size\n";
+                Files.write(path, header.getBytes(StandardCharsets.UTF_8));
+            }
+            String row = implementationName + "," + timeMs + "," + sampleSize + "\n";
+            Files.write(path, row.getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            System.err.println("Erro ao escrever CSV: " + e.getMessage());
+        }
     }
 
     public static void genRandomData(){
