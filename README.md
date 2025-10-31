@@ -1,3 +1,6 @@
+# Link do repositório:
+https://github.com/gustavo-sen/parallel-sorting
+
 # Algoritmos de Sorting
 
 Equipe: 
@@ -95,7 +98,7 @@ Observação: SelectionSort paralelo e CountingSort paralelo usam 2 threads; Qui
 Os resultados indicam que as implementações desenvolvidas, apenas a do InsertionSort teve o melhor desempenho quando executado em paralelo.
 O principal motivo é que além da maior parte da execução ser paralelo, as threads não ficavam ociosas durante a sua execução e nem tinham problemas de overhead.
 No caso do counting sort, o manejo de cópias de grandes arrays em duas threads além de apenas a primeira parte do processo ser paralelizável não gerou melhorias na execução paralela.
-Já para o quicksort e merge sort, a abordagem de substituir a recursão por threads da common pool não demonstrou eficiente, provavelmente pela soma do overhead com o tempo ocioso de cada threads esperando as threads filhas terminarem.
+Já para o quicksort e merge sort, a abordagem de substituir a recursão por threads da common pool não se demonstrou eficiente, provavelmente pela soma do overhead com o tempo ocioso de cada threads esperando as threads filhas terminarem.
 Talvez uma abordagem que reutilização de threads (como no InsertionSort) possa melhorar o desempenho.
 
 Arquivos disponíveis:
