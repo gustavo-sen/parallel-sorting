@@ -12,7 +12,7 @@ Equipe:
 > **Tipo:** Divide e Conquista
 
 ### Serial
-- Escolhe um pivô.
+- Escolhe um pivô (no caso da abordagem do trabalho, foi feito escolhendo o ultimo elemento do array, o que introduziu também uma maior possibilidade de desbalanceamento da árvore).
 - Particiona o array em dois grupos: menores e maiores que o pivô.
 - Resolve recursivamente cada lado.
 
